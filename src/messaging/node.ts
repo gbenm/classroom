@@ -9,6 +9,7 @@ import { EventEmitter, Readable, Writable } from "stream"
 export type EmitterFn = (message: Message) => boolean
 
 export abstract class Node extends EventEmitter {
+  public readonly close: () => void
   private get handler() {
     return this.handleMessage.bind(this, this.emit.bind(this, "message"))
   }
@@ -25,6 +26,10 @@ export abstract class Node extends EventEmitter {
     ])
 
     messageReader.on("data", this.handler)
+
+    this.close = () => {
+      messageReader.destroy()
+    }
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

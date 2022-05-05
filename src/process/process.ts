@@ -1,6 +1,5 @@
 import { ChildProcess, spawn } from "child_process"
 import { createHash } from "crypto"
-import { Readable, Writable } from "stream"
 import { Command, Config, Student } from "../cli-config"
 import { Message } from "../messaging/message"
 import { EmitterFn, Node } from "../messaging/node"
@@ -49,6 +48,8 @@ export class Process {
 
     const cypher = createHash("md5")
 
+    process.setMaxListeners(Infinity)
+
     return new ProcessConnection(
       cypher.update(`${tagId++}`).digest("hex"),
       process,
@@ -85,5 +86,6 @@ export class ProcessConnection extends Node {
     if (this.instanceByConnection) {
       this.process.kill()
     }
+    this.close()
   }
 }

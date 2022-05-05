@@ -1,5 +1,6 @@
 import { Config } from "../../cli-config"
 import { Process } from "../../process/process"
+import { fromCurrentDir } from "../../utils"
 import { ProcessInformation, StudentProcessStep } from "../step"
 
 export class GradeProcessStep extends StudentProcessStep {
@@ -13,7 +14,8 @@ export class GradeProcessStep extends StudentProcessStep {
         connection.sendMessage({
           type: "request",
           tag: connection.tag,
-          student: info.student
+          student: info.student,
+          path: fromCurrentDir(this.config.clone.getCloneDirectory(info.student))
         })
 
         connection.on("message", (message) => {

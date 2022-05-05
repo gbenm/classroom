@@ -22,7 +22,7 @@ const cloneRepo = (config: Config, student: Student) => {
 
   return new Promise<ProcessInformation>((resolve) => {
     process.on("exit", (code) => {
-      resolve({ student, exitCode: code })
+      resolve({ student, exitCode: code, step: "clone" })
     })
   })
 }

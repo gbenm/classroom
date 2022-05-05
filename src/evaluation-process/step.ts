@@ -2,6 +2,7 @@ import { Config, Student } from "../cli-config"
 
 export interface ProcessInformation {
   student: Student
+  step: string
   exitCode?: number | null
   grade?: number
   comment?: string

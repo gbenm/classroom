@@ -7,7 +7,7 @@ export class InitialStep extends StudentProcessStep {
   }
 
   public start(): void {
-    this.students.forEach(student => this.execute({ student }))
+    this.students.forEach(student => this.execute({ student, step: "initial" }))
   }
 
   protected execute(info: ProcessInformation): Promise<ProcessInformation> {

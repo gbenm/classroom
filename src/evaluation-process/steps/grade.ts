@@ -9,6 +9,12 @@ export class GradeProcessStep extends StudentProcessStep {
   }
 
   protected execute(info: ProcessInformation): Promise<ProcessInformation> {
+    info.step = "grade"
+
+    if (info.exitCode) {
+      return Promise.resolve(info)
+    }
+
     return new Promise((resolve) => this.process.connect(info.student)
       .then((connection) => {
         connection.sendMessage({

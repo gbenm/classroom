@@ -3,7 +3,7 @@ import { createHash } from "crypto"
 import { Readable, Writable } from "stream"
 import { Command, Config, Student } from "../cli-config"
 import { Message } from "../messaging/message"
-import { Node } from "../messaging/node"
+import { EmitterFn, Node } from "../messaging/node"
 import { buildCommand } from "../utils"
 
 let tagId = 0
@@ -33,7 +33,7 @@ export class Process {
   }
 
   private getIntance(student: Student): ChildProcess {
-    if (this.instanceByConnection) {
+    if (!this.instanceByConnection) {
       if (!this.process) {
         this.process = this.launch(student)
       }
@@ -47,27 +47,43 @@ export class Process {
   async connect(student: Student): Promise<ProcessConnection> {
     const process = this.getIntance(student)
 
-    if (!process.stdout || !process.stdin) {
-      throw new Error("process not ready")
-    }
-
     const cypher = createHash("md5")
 
     return new ProcessConnection(
       cypher.update(`${tagId++}`).digest("hex"),
-      process.stdout,
-      process.stdin,
+      process,
+      this.instanceByConnection
     )
+  }
+
+  async exit(): Promise<void> {
+    this.process?.kill()
   }
 }
 
 export class ProcessConnection extends Node {
 
-  constructor(public readonly tag: string, input: Readable, output: Writable) {
-    super(input, output)
+  constructor(
+    public readonly tag: string,
+    private process: ChildProcess,
+    private instanceByConnection: boolean,
+  ) {
+    if (!process.stdout || !process.stdin) {
+      throw new Error("process not ready")
+    }
+
+    super(process.stdout, process.stdin)
   }
 
-  protected handleMessage(message: Message): void {
-    console.log(this.tag, message)
+  protected handleMessage(emit: EmitterFn, message: Message): void {
+    if (this.tag === message.tag) {
+      emit(message)
+    }
+  }
+
+  async disconnect(): Promise<void> {
+    if (this.instanceByConnection) {
+      this.process.kill()
+    }
   }
 }

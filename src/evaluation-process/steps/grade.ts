@@ -7,15 +7,22 @@ export class GradeProcessStep extends StudentProcessStep {
     super(config)
   }
 
-  protected async execute(info: ProcessInformation): Promise<ProcessInformation> {
-    const connection = await this.process.connect(info.student)
+  protected execute(info: ProcessInformation): Promise<ProcessInformation> {
+    return new Promise((resolve) => this.process.connect(info.student)
+      .then((connection) => {
+        connection.sendMessage({
+          type: "request",
+          tag: connection.tag,
+          student: info.student
+        })
 
-    connection.sendMessage({
-      type: "request",
-      tag: connection.tag,
-      student: info.student
-    })
+        connection.on("message", (message) => {
+          console.log("from grade", message)
 
-    return info
+          connection.disconnect()
+          resolve(info)
+        })
+      })
+    )
   }
 }

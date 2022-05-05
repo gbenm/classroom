@@ -11,6 +11,7 @@ import { CloneProcessStep } from "./evaluation-process/steps/clone"
 import { GradeProcessStep } from "./evaluation-process/steps/grade"
 import { WriteProcessStep } from "./evaluation-process/steps/write"
 import { Process } from "./process/process"
+import { FinalStep } from "./evaluation-process/steps/final"
 
 const getStudents = (config: Config): Student[] => {
   const csv = readFileSync(fromCurrentDir(config.classroomFile))
@@ -58,15 +59,19 @@ const prepare = (config: Config): InitialStep => {
       throw new Error(`Unknown execution mode: ${config.executeBy}`)
   }
 
+  const gradeLauncher = new Process(config, config.grader?.cmd ?? [], config.grader?.byStudent ?? false)
+
   const initialStep = new InitialStep(config, students)
   const buffer = new BufferStep(config, bufferSize)
   const showProgress = new ShowProgress(config, students.length, showCloneProgress)
   const cloneStep = new CloneProcessStep(config)
-  const gradeStep = new GradeProcessStep(config, new Process(config, config.grader?.cmd ?? [], config.grader?.byStudent ?? false))
+  const gradeStep = new GradeProcessStep(config, gradeLauncher)
   const showGradeProcess = showProgress.clone(showGradeProgress)
   const gradeBuffer = buffer.clone()
   const writeStep = new WriteProcessStep(config)
   const showCompletedProcess = showProgress.clone(showCompletedProgress)
+  const finalBuffer = new BufferStep(config, students.length)
+  const finalStep = new FinalStep(config, [ gradeLauncher ])
 
   initialStep.setNext(cloneStep)
   cloneStep.setNext(showProgress)
@@ -76,6 +81,8 @@ const prepare = (config: Config): InitialStep => {
   showGradeProcess.setNext(gradeBuffer)
   gradeBuffer.setNext(writeStep)
   writeStep.setNext(showCompletedProcess)
+  showCompletedProcess.setNext(finalBuffer)
+  finalBuffer.setNext(finalStep)
 
   return initialStep
 }

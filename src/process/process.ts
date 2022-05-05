@@ -22,10 +22,14 @@ export class Process {
       getCloneDirectory: this.config.clone.getCloneDirectory
     }, this.cmd)
 
+    const dir = this.instanceByConnection ?
+      this.config.clone.getCloneDirectory(student) :
+      ".."
+
     const process = spawn(command, {
       shell: true,
       stdio: "pipe",
-      cwd: ".."
+      cwd: dir
     })
 
     return process

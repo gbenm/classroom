@@ -1,9 +1,12 @@
 import { ChildProcess, spawn } from "child_process"
+import { createHash } from "crypto"
 import { Readable, Writable } from "stream"
 import { Command, Config, Student } from "../cli-config"
 import { Message } from "../messaging/message"
 import { Node } from "../messaging/node"
 import { buildCommand } from "../utils"
+
+let tagId = 0
 
 export class Process {
   private process?: ChildProcess
@@ -48,8 +51,10 @@ export class Process {
       throw new Error("process not ready")
     }
 
+    const cypher = createHash("md5")
+
     return new ProcessConnection(
-      Date.now().toString(),
+      cypher.update(`${tagId++}`).digest("hex"),
       process.stdout,
       process.stdin,
     )
@@ -58,11 +63,11 @@ export class Process {
 
 export class ProcessConnection extends Node {
 
-  constructor(tag: string, input: Readable, output: Writable) {
+  constructor(public readonly tag: string, input: Readable, output: Writable) {
     super(input, output)
   }
 
   protected handleMessage(message: Message): void {
-    console.log(message)
+    console.log(this.tag, message)
   }
 }

@@ -12,7 +12,7 @@ export class GradeProcessStep extends StudentProcessStep {
 
     connection.sendMessage({
       type: "request",
-      tag: "399202",
+      tag: connection.tag,
       student: info.student
     })
 

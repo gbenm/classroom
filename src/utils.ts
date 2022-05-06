@@ -2,6 +2,8 @@ import { join } from "path"
 import { Command, CommandContext } from "./cli-config"
 import { StudentProcessStep } from "./evaluation-process/step"
 
+export const reposDir = "repos"
+
 export const fromCurrentDir = (path: string) => {
   const currentDir = process.cwd()
   return join(currentDir, path)

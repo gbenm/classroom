@@ -1,6 +1,6 @@
 import { spawn } from "child_process"
 import { Config, Student } from "../../cli-config"
-import { buildCommand } from "../../utils"
+import { buildCommand, reposDir } from "../../utils"
 import { ProcessInformation, StudentProcessStep } from "../step"
 
 export class CloneProcessStep extends StudentProcessStep {
@@ -16,6 +16,7 @@ const cloneRepo = (config: Config, student: Student) => {
   }, config.clone.cmd)
 
   const process = spawn(command, {
+    cwd: reposDir,
     shell: config.clone.showOutput,
     stdio: "inherit"
   })

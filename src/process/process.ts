@@ -1,9 +1,10 @@
 import { ChildProcess, spawn } from "child_process"
 import { createHash } from "crypto"
+import { join } from "path"
 import { Command, Config, Student } from "../cli-config"
 import { Message } from "../messaging/message"
 import { EmitterFn, Node } from "../messaging/node"
-import { buildCommand } from "../utils"
+import { buildCommand, reposDir } from "../utils"
 
 let tagId = 0
 
@@ -23,8 +24,8 @@ export class Process {
     }, this.cmd)
 
     const dir = this.instanceByConnection ?
-      this.config.clone.getCloneDirectory(student) :
-      ".."
+      join(reposDir, this.config.clone.getCloneDirectory(student)) :
+      undefined
 
     const process = spawn(command, {
       shell: true,

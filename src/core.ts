@@ -3,7 +3,7 @@ import { parse } from "csv-parse/sync"
 
 import { ConfigGenerator, Config, Student } from "./cli-config/ghcl.types"
 import * as utils from "./cli-config/utils"
-import { chainSteps, fromCurrentDir } from "./utils"
+import { chainSteps, fromCurrentDir, reposDir } from "./utils"
 import { InitialStep } from "./evaluation-process/steps/initial"
 import { BufferStep } from "./evaluation-process/steps/buffer"
 import { ShowProgress } from "./evaluation-process/steps/show-process"
@@ -12,6 +12,8 @@ import { GradeProcessStep } from "./evaluation-process/steps/grade"
 import { WriteProcessStep } from "./evaluation-process/steps/write"
 import { Process } from "./process/process"
 import { FinalStep } from "./evaluation-process/steps/final"
+import { Logger } from "./evaluation-process/steps/logger"
+import chalk from "chalk"
 
 const getStudents = (config: Config): Student[] => {
   const csv = readFileSync(fromCurrentDir(config.classroomFile))
@@ -24,27 +26,24 @@ const getStudents = (config: Config): Student[] => {
 }
 
 const showCloneProgressFn = (progres: number, total: number): string => {
-  return `\x1b[33m\x1b[1mClone Progress:\x1b[0m \x1b[33m${progres}/${total}\x1b[0m`
+  return chalk`{yellow.bold Clone Progress:} {yellow ${progres}/${total}}`
 }
 
 const showGradeProgressFn = (progres: number, total: number): string => {
-  return `\x1b[36m\x1b[1mGrade Progress:\x1b[0m \x1b[33m${progres}/${total}\x1b[0m`
+  return chalk`{blue.bold Grade Progress:} {yellow ${progres}/${total}}`
 }
 
 
 const showCompletedProgressFn = (progres: number, total: number): string => {
-  return `\x1b[32m\x1b[1mCompleted Progress:\x1b[0m \x1b[33m${progres}/${total}\x1b[0m`
+  return chalk`{green.bold Completed Progress:} {yellow ${progres}/${total}}`
 }
 
 const prepare = (config: Config): InitialStep => {
-  const reposDir = "repos"
   mkdirSync(fromCurrentDir(reposDir), { recursive: true })
 
   const students = config.filter ?
     getStudents(config).filter(config.filter) :
     getStudents(config)
-
-  process.chdir(reposDir)
 
   let bufferSize: number
 
@@ -72,16 +71,20 @@ const prepare = (config: Config): InitialStep => {
   const showCompletedProgress = showCloneProgress.clone(showCompletedProgressFn)
   const finalBuffer = new BufferStep(config, students.length)
   const finalStep = new FinalStep(config, [ gradeLauncher ])
+  const logger = new Logger(config)
 
   chainSteps([
     initialStep,
     cloneStep,
+    logger,
     showCloneProgress,
     cloneBuffer,
     gradeStep,
+    logger.clone(),
     showGradeProgress,
     gradeBuffer,
     writeStep,
+    logger.clone(),
     showCompletedProgress,
     finalBuffer,
     finalStep

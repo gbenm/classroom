@@ -3,7 +3,7 @@ import { parse } from "csv-parse/sync"
 
 import { ConfigGenerator, Config, Student } from "./cli-config/ghcl.types"
 import * as utils from "./cli-config/utils"
-import { fromCurrentDir } from "./utils"
+import { chainSteps, fromCurrentDir } from "./utils"
 import { InitialStep } from "./evaluation-process/steps/initial"
 import { BufferStep } from "./evaluation-process/steps/buffer"
 import { ShowProgress } from "./evaluation-process/steps/show-process"
@@ -23,16 +23,16 @@ const getStudents = (config: Config): Student[] => {
   return students
 }
 
-const showCloneProgress = (progres: number, total: number): string => {
+const showCloneProgressFn = (progres: number, total: number): string => {
   return `\x1b[33m\x1b[1mClone Progress:\x1b[0m \x1b[33m${progres}/${total}\x1b[0m`
 }
 
-const showGradeProgress = (progres: number, total: number): string => {
+const showGradeProgressFn = (progres: number, total: number): string => {
   return `\x1b[36m\x1b[1mGrade Progress:\x1b[0m \x1b[33m${progres}/${total}\x1b[0m`
 }
 
 
-const showCompletedProgress = (progres: number, total: number): string => {
+const showCompletedProgressFn = (progres: number, total: number): string => {
   return `\x1b[32m\x1b[1mCompleted Progress:\x1b[0m \x1b[33m${progres}/${total}\x1b[0m`
 }
 
@@ -46,7 +46,7 @@ const prepare = (config: Config): InitialStep => {
 
   process.chdir(reposDir)
 
-  let bufferSize
+  let bufferSize: number
 
   switch(config.executeBy) {
     case "step":
@@ -62,27 +62,30 @@ const prepare = (config: Config): InitialStep => {
   const gradeLauncher = new Process(config, config.grader?.cmd ?? [], config.grader?.byStudent ?? false)
 
   const initialStep = new InitialStep(config, students)
-  const buffer = new BufferStep(config, bufferSize)
-  const showProgress = new ShowProgress(config, students.length, showCloneProgress)
+  const cloneBuffer = new BufferStep(config, bufferSize)
+  const showCloneProgress = new ShowProgress(config, students.length, showCloneProgressFn)
   const cloneStep = new CloneProcessStep(config)
   const gradeStep = new GradeProcessStep(config, gradeLauncher)
-  const showGradeProcess = showProgress.clone(showGradeProgress)
-  const gradeBuffer = buffer.clone()
+  const showGradeProgress = showCloneProgress.clone(showGradeProgressFn)
+  const gradeBuffer = cloneBuffer.clone()
   const writeStep = new WriteProcessStep(config)
-  const showCompletedProcess = showProgress.clone(showCompletedProgress)
+  const showCompletedProgress = showCloneProgress.clone(showCompletedProgressFn)
   const finalBuffer = new BufferStep(config, students.length)
   const finalStep = new FinalStep(config, [ gradeLauncher ])
 
-  initialStep.setNext(cloneStep)
-  cloneStep.setNext(showProgress)
-  showProgress.setNext(buffer)
-  buffer.setNext(gradeStep)
-  gradeStep.setNext(showGradeProcess)
-  showGradeProcess.setNext(gradeBuffer)
-  gradeBuffer.setNext(writeStep)
-  writeStep.setNext(showCompletedProcess)
-  showCompletedProcess.setNext(finalBuffer)
-  finalBuffer.setNext(finalStep)
+  chainSteps([
+    initialStep,
+    cloneStep,
+    showCloneProgress,
+    cloneBuffer,
+    gradeStep,
+    showGradeProgress,
+    gradeBuffer,
+    writeStep,
+    showCompletedProgress,
+    finalBuffer,
+    finalStep
+  ])
 
   return initialStep
 }

@@ -1,5 +1,6 @@
 import { join } from "path"
 import { Command, CommandContext } from "./cli-config"
+import { StudentProcessStep } from "./evaluation-process/step"
 
 export const fromCurrentDir = (path: string) => {
   const currentDir = process.cwd()
@@ -19,4 +20,15 @@ export const buildCommand = (context: CommandContext, commands: Command[]) => {
       return arg
     }).join(" ")}`
   }).join("\n")
+}
+
+export const chainSteps = (steps: StudentProcessStep[]) => {
+  steps.forEach((step, i) => {
+    const next = steps[i + 1]
+    if (next) {
+      step.setNext(next)
+    }
+  })
+
+  return steps[0]
 }

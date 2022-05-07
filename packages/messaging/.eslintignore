@@ -1,0 +1,6 @@
+.git/
+.vscode/
+.yarn/
+node_modules/
+dist/
+test/

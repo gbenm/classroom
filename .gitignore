@@ -9,11 +9,3 @@
 # Documentation here: https://yarnpkg.com/features/zero-installs
 !.yarn/cache
 #.pnp.*
-
-# javascript
-*.ignore.js
-
-# project
-test/
-dist/
-node_modules/

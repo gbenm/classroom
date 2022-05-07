@@ -21,9 +21,6 @@
     "ts-node": "^10.7.0",
     "typescript": "^4.6.4"
   },
-  "dependencies": {
-    "stream-json": "^1.7.4"
-  },
   "typesVersions": {
     "*": {
       "types": ["./dist/types/index.d.ts"]

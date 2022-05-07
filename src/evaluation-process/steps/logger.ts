@@ -4,7 +4,13 @@ import { join } from "path"
 import { Config, Student } from "../../cli-config"
 import { ProcessInformation, StudentProcessStep } from "../step"
 
-type LogEntry = {
+export type JsonLog = {
+  create_at: string,
+  timestamp: number,
+  log: LogEntry[]
+}
+
+export type LogEntry = {
   step: string,
   status: string,
   student: Student,
@@ -29,7 +35,7 @@ export class Logger extends StudentProcessStep {
         create_at: currentDate.toISOString(),
         timestamp: currentDate.getTime(),
         log: this.jsonLog,
-      }, null, 2))
+      } as JsonLog, null, 2))
       this.jsonLog = []
     }
   }

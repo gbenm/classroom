@@ -1,12 +1,11 @@
-import { Student } from "../cli-config"
-
-export type MessageType = "grade" | "error" | "exec"
+export enum MessageType {
+  response = "response",
+  request = "request",
+  error = "error"
+}
 
 export interface Message {
   tag: string
-  type: string
-  student?: Student
-  comment?: string
-  grade?: number
-  path?: string
+  type: MessageType
+  [key: string]: unknown
 }

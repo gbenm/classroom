@@ -8,6 +8,8 @@ export class WriteProcessStep extends StudentProcessStep {
       return Promise.resolve(info)
     }
 
+    console.log("write", info)
+
     return Promise.resolve(info)
   }
 }

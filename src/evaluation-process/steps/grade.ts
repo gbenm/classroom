@@ -2,6 +2,7 @@ import { Config } from "../../cli-config"
 import { Process } from "../../process/process"
 import { fromCurrentDir } from "../../utils"
 import { ProcessInformation, StudentProcessStep } from "../step"
+import { MessageType } from "../../messaging"
 
 export class GradeProcessStep extends StudentProcessStep {
   constructor(config: Config, private process: Process) {
@@ -17,16 +18,37 @@ export class GradeProcessStep extends StudentProcessStep {
 
     return new Promise((resolve) => this.process.connect(info.student)
       .then((connection) => {
+        if (connection.exitCode) {
+          info.exitCode = connection.exitCode
+          resolve(info)
+          return
+        }
+
         connection.sendMessage({
-          type: "request",
+          type: MessageType.request,
           tag: connection.tag,
           student: info.student,
           path: fromCurrentDir(this.config.clone.getCloneDirectory(info.student))
         })
 
         connection.on("message", (message) => {
-          console.log("from grade", message)
+          if (message.type === MessageType.error) {
+            info.exitCode = -1
+            info.comment = message.comment as string
+            connection.disconnect()
+            resolve(info)
+            return
+          }
 
+          if (message.type === MessageType.response) {
+            info.grade = message.grade as number
+            info.comment = message.comment as string
+            connection.disconnect()
+            resolve(info)
+            return
+          }
+
+          info.exitCode = -1
           connection.disconnect()
           resolve(info)
         })

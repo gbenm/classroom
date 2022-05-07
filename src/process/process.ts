@@ -68,6 +68,9 @@ export class Process {
 }
 
 export class ProcessConnection extends Node {
+  public get exitCode(): number | null {
+    return this.process.exitCode
+  }
 
   constructor(
     public readonly tag: string,

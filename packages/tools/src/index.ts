@@ -1,6 +1,5 @@
 import { join } from "path"
-import { Command, CommandContext } from "./cli-config"
-import { StudentProcessStep } from "./evaluation-process/step"
+import { Command, CommandContext, StudentProcessStep } from "./types"
 
 export const reposDir = "repos"
 

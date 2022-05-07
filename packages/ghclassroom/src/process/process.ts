@@ -3,7 +3,7 @@ import { createHash } from "crypto"
 import { join } from "path"
 import { Command, Config, Student } from "../cli-config"
 import { Message, EmitterFn, Node } from "../messaging"
-import { buildCommand, reposDir } from "../utils"
+import { buildCommand, reposDir } from "tools"
 
 let tagId = 0
 

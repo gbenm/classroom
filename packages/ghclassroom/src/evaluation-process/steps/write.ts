@@ -1,4 +1,4 @@
-import { ProcessInformation, StudentProcessStep } from "../step"
+import { ProcessInformation, StudentProcessStep } from "tools/types"
 
 export class WriteProcessStep extends StudentProcessStep {
   protected execute(info: ProcessInformation): Promise<ProcessInformation> {

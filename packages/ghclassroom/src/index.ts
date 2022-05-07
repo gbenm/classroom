@@ -4,11 +4,11 @@ import init from "./core"
 import { init as loggerInit } from "./logger-command/core"
 import { ConfigGenerator } from "./cli-config"
 import { copyFileSync, readdirSync } from "fs"
-import { join } from "path"
+import { dirname, join } from "path"
 import yargs from "yargs"
 import { hideBin } from "yargs/helpers"
 import { prompt } from "inquirer"
-import { fromCurrentDir } from "./utils"
+import { fromCurrentDir } from "tools"
 
 const identity = (x: unknown) => x
 
@@ -27,7 +27,7 @@ const run = () => {
 yargs(hideBin(process.argv))
 .command("init", "Crea los archivos de configuración en el directorio actual", identity, () => {
   lock = true
-  const typesFile = join(__dirname, "cli-config", "ghcl.types.d.ts")
+  const typesFile = join(dirname(require.resolve("tools")), "types", "ghcl.types.d.ts")
   const configTemplateFile = join(__dirname, "cli-config", "ghcl.config.mjs")
 
   copyFileSync(typesFile, join(currentDir, "ghcl.types.ts"))

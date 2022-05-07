@@ -1,9 +1,9 @@
 import { mkdirSync, readFileSync } from "fs"
 import { parse } from "csv-parse/sync"
 
-import { ConfigGenerator, Config, Student } from "./cli-config/ghcl.types"
+import { ConfigGenerator, Config, Student } from "tools/types"
 import * as utils from "./cli-config/utils"
-import { chainSteps, fromCurrentDir, reposDir } from "./utils"
+import { chainSteps, fromCurrentDir, reposDir } from "tools"
 import { InitialStep } from "./evaluation-process/steps/initial"
 import { BufferStep } from "./evaluation-process/steps/buffer"
 import { ShowProgress } from "./evaluation-process/steps/show-process"

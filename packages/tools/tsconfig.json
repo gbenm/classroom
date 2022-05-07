@@ -22,7 +22,5 @@
     "**/*.test.ts"
   ],
   "references": [
-    { "path": "../messaging" },
-    { "path": "../tools" }
   ]
 }

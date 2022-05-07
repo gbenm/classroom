@@ -10,7 +10,9 @@
     "build": "yarn prebuild && tsc"
   },
   "exports": {
-    "./messaging": "./dist/messaging/index.js"
+    "./messaging": "./dist/messaging/index.js",
+    "./cli-config": "./dist/cli-config/index.js",
+    "./evaluation-process": "./dist/evaluation-process/index.js"
   },
   "devDependencies": {
     "@types/eslint": "^8.4.1",
@@ -31,12 +33,19 @@
     "inquirer": "^8.2.4",
     "messaging": "workspace:^",
     "stream-json": "^1.7.4",
+    "tools": "workspace:^",
     "yargs": "^17.4.1"
   },
   "typesVersions": {
     "*": {
       "messaging": [
         "./dist/messaging/index.d.ts"
+      ],
+      "cli-config": [
+        "./dist/cli-config/index.d.ts"
+      ],
+      "evaluation-process": [
+        "./dist/evaluation-process/index.d.ts"
       ]
     }
   }

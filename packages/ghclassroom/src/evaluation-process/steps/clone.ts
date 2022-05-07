@@ -1,7 +1,7 @@
 import { spawn } from "child_process"
 import { Config, Student } from "../../cli-config"
-import { buildCommand, reposDir } from "../../utils"
-import { ProcessInformation, StudentProcessStep } from "../step"
+import { buildCommand, reposDir } from "tools"
+import { ProcessInformation, StudentProcessStep } from "tools/types"
 
 export class CloneProcessStep extends StudentProcessStep {
   protected execute(info: ProcessInformation): Promise<ProcessInformation> {

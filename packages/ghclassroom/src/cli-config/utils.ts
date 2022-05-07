@@ -1,4 +1,4 @@
-import { CommandContext, Student } from "./ghcl.types"
+import { CommandContext, Student } from "tools/types"
 
 export const createPATUrlGit = (pat: string, username: string, repo: string) => `https://${pat}@github.com/${username}/${repo}`
 export const createSSHUrlGit = (username: string, repo: string) => `git@github.com:${username}/${repo}.git`

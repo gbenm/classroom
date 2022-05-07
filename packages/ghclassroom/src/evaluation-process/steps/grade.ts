@@ -1,7 +1,7 @@
 import { Config } from "../../cli-config"
 import { Process } from "../../process/process"
-import { fromCurrentDir } from "../../utils"
-import { ProcessInformation, StudentProcessStep } from "../step"
+import { fromCurrentDir } from "tools"
+import { ProcessInformation, StudentProcessStep } from "tools/types"
 import { MessageType } from "../../messaging"
 
 export class GradeProcessStep extends StudentProcessStep {

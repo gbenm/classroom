@@ -1,4 +1,4 @@
-import { Config, Student } from "../cli-config"
+import { Config, Student } from "./ghcl.types"
 
 export interface ProcessInformation {
   student: Student

@@ -1,5 +1,5 @@
 import { Config } from "../../cli-config"
-import { StudentProcessStep, ProcessInformation } from "../step"
+import { StudentProcessStep, ProcessInformation } from "tools/types"
 
 export class BufferStep extends StudentProcessStep {
   private buffer: ProcessInformation[] = []

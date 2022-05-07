@@ -1,5 +1,5 @@
 import { Config, Student } from "../../cli-config"
-import { ProcessInformation, StudentProcessStep } from "../step"
+import { ProcessInformation, StudentProcessStep } from "tools/types"
 
 export class InitialStep extends StudentProcessStep {
   public constructor(config: Config, private students: Student[]) {

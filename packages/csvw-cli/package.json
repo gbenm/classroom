@@ -1,6 +1,19 @@
 {
   "name": "csvw-cli",
+  "version": "1.0.0-beta",
   "packageManager": "yarn@3.2.0",
+  "author": "Josué Galeano",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gbenm/classroom.git"
+  },
+  "homepage": "https://github.com/gbenm/classroom",
+  "keywords": [
+    "csv",
+    "cli",
+    "write"
+  ],
   "bin": {
     "csvwriter": "./dist/cli.cjs"
   },
@@ -40,5 +53,8 @@
     "messaging": "workspace:^",
     "tools": "workspace:^",
     "yargs": "^17.4.1"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "module": "commonjs",
+    "target": "ES5",
+    "incremental": true,
+    "removeComments": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "inlineSourceMap": true,
+    "declaration": true,
+    "outDir": "dist",
+    "strict": true,
+    "noImplicitAny": false,
+    "composite": true
+  },
+  "include": ["src"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts"
+  ],
+  "references": [
+    { "path": "../messaging" },
+    { "path": "../tools" },
+  ]
+}

@@ -12,5 +12,8 @@
   "rules": {
     "quotes": [ "error", "double" ],
     "semi": [ "error", "never" ]
-  }
+  },
+  "ignorePatterns": [
+    "dist"
+  ]
 }

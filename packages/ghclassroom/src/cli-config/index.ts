@@ -1,1 +1,1 @@
-export * from "tools/types"
+export * from "./ghcl.types"

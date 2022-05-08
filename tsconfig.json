@@ -1,6 +1,8 @@
 {
   "references": [
     { "path": "./packages/ghclassroom" },
-    { "path": "./packages/messaging" }
+    { "path": "./packages/messaging" },
+    { "path": "./packages/tools" },
+    { "path": "./packages/csvw-cli" }
   ]
 }

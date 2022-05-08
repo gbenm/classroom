@@ -2,17 +2,17 @@
   "name": "ghclassroom",
   "packageManager": "yarn@3.2.0",
   "main": "dist/index.js",
-  "bin": "dist/index.js",
+  "bin": "dist/cli.cjs",
   "types": "dist/index.d.ts",
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "prebuild": "yarn lint && cpy ./src/cli-config/ghcl.config.mjs ./dist/cli-config/ --flat && chmod +x ./dist/index.js",
-    "build": "yarn prebuild && tsc"
+    "copybin": "cpy ./src/cli.cjs ./dist/ --flat",
+    "copyconf": "cpy ./src/cli-config/ghcl.config.mjs ./dist/cli-config/ --flat",
+    "prebuild": "yarn lint && yarn copyconf && yarn copybin",
+    "build": "yarn prebuild && tsc --build --force"
   },
   "exports": {
-    "./messaging": "./dist/messaging/index.js",
-    "./cli-config": "./dist/cli-config/index.js",
-    "./evaluation-process": "./dist/evaluation-process/index.js"
+    "./messaging": "./dist/messaging/index.js"
   },
   "devDependencies": {
     "@types/eslint": "^8.4.1",
@@ -40,12 +40,6 @@
     "*": {
       "messaging": [
         "./dist/messaging/index.d.ts"
-      ],
-      "cli-config": [
-        "./dist/cli-config/index.d.ts"
-      ],
-      "evaluation-process": [
-        "./dist/evaluation-process/index.d.ts"
       ]
     }
   }

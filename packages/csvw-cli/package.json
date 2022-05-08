@@ -1,0 +1,40 @@
+{
+  "name": "csvw-cli",
+  "packageManager": "yarn@3.2.0",
+  "bin": {
+    "csvwriter": "./dist/cli.cjs"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "lint": "eslint . --ext .ts",
+    "cpybin": "cpy ./src/cli.cjs ./dist --flat",
+    "prebuild": "yarn lint && yarn cpybin",
+    "build": "yarn prebuild && tsc --build --force"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./messaging": "./dist/messaging.js"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.4.1",
+    "@types/node": "^17.0.30",
+    "@typescript-eslint/eslint-plugin": "^5.21.0",
+    "@typescript-eslint/parser": "^5.21.0",
+    "cpy-cli": "^4.1.0",
+    "eslint": "^8.14.0",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.4"
+  },
+  "typesVersions": {
+    "*": {
+      "messaging": [
+        "./dist/messaging.d.ts"
+      ]
+    }
+  },
+  "dependencies": {
+    "messaging": "workspace:^",
+    "tools": "workspace:^"
+  }
+}

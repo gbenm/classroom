@@ -9,7 +9,8 @@
   "scripts": {
     "lint": "eslint . --ext .ts",
     "cpybin": "cpy ./src/cli.cjs ./dist --flat",
-    "prebuild": "yarn lint && yarn cpybin",
+    "copyconf": "cpy ./src/cli-config/csvw.config.mjs ./dist/cli-config --flat",
+    "prebuild": "yarn lint && yarn cpybin && yarn copyconf",
     "build": "yarn prebuild && tsc --build --force"
   },
   "exports": {
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@types/eslint": "^8.4.1",
     "@types/node": "^17.0.30",
+    "@types/yargs": "^17.0.10",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "@typescript-eslint/parser": "^5.21.0",
     "cpy-cli": "^4.1.0",
@@ -34,7 +36,9 @@
     }
   },
   "dependencies": {
+    "csv": "^6.0.5",
     "messaging": "workspace:^",
-    "tools": "workspace:^"
+    "tools": "workspace:^",
+    "yargs": "^17.4.1"
   }
 }

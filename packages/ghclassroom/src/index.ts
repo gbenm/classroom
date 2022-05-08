@@ -8,9 +8,7 @@ import { dirname, join } from "path"
 import yargs from "yargs"
 import { hideBin } from "yargs/helpers"
 import { prompt } from "inquirer"
-import { fromCurrentDir } from "tools"
-
-const identity = (x: unknown) => x
+import { fromCurrentDir, identity } from "tools"
 
 let lock = false
 

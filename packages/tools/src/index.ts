@@ -33,3 +33,5 @@ export const chainSteps = (steps: StudentProcessStep[]) => {
 
   return steps[0]
 }
+
+export const identity = <T>(x: T) => x

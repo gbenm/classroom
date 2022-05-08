@@ -62,3 +62,13 @@ export interface Utils {
   cloneDirectory: CommandArgFn
   getCloneDirectory: PathGeneratorFunction
 }
+
+export interface CSVWConfig {
+  source: string
+  mappings: { tag: string[], column: string }[]
+  seekConfig: {
+    tag: string[]
+    column: string
+    seek: (target: unknown, itemId: unknown) => boolean
+  }
+}

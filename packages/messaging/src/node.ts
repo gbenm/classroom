@@ -8,7 +8,7 @@ import { EventEmitter, Readable, Writable } from "stream"
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type EmitterFn = (message: Message) => boolean
 
-export abstract class Node extends EventEmitter {
+export class MessagingNode extends EventEmitter {
   public readonly close: () => void
   private get handler() {
     return this.handleMessage.bind(this, this.emit.bind(this, "message"))
@@ -42,5 +42,7 @@ export abstract class Node extends EventEmitter {
     this.output.write(JSON.stringify(message))
   }
 
-  protected abstract handleMessage(emit: EmitterFn, message: Message): void
+  protected handleMessage(emit: EmitterFn, message: Message): void {
+    emit(message)
+  }
 }

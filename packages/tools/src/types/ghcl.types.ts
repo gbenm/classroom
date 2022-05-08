@@ -65,10 +65,12 @@ export interface Utils {
 
 export interface CSVWConfig {
   source: string
+  headerRowNumber: number
+  enconding?: BufferEncoding
   mappings: { tag: string[], column: string }[]
   seekConfig: {
     tag: string[]
     column: string
-    seek: (target: unknown, itemId: unknown) => boolean
+    transform: (target: unknown) => string[]
   }
 }

@@ -9,7 +9,7 @@ export class FinalStep extends StudentProcessStep {
   }
 
   protected execute(info: ProcessInformation): Promise<ProcessInformation> {
-    this.launchers.forEach((launcher) => launcher.exit())
+    this.launchers.forEach(launcher => launcher.exit())
     Logger.write()
     return Promise.resolve(info)
   }

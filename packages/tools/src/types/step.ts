@@ -6,6 +6,7 @@ export interface ProcessInformation {
   exitCode?: number | null
   grade?: number
   comment?: string
+  [key: string]: unknown
 }
 
 export abstract class StudentProcessStep {

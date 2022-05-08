@@ -15,7 +15,8 @@ export type LogEntry = {
   status: string,
   student: Student,
   grade?: number,
-  comment?: string
+  comment?: string,
+  [key: string]: unknown
 }
 
 export class Logger extends StudentProcessStep {

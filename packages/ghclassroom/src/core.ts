@@ -1,7 +1,7 @@
 import { mkdirSync, readFileSync } from "fs"
 import { parse } from "csv-parse/sync"
 
-import { ConfigGenerator, Config, Student } from "tools/types"
+import { ConfigGenerator, Config, Student, StudentProcessStep } from "tools/types"
 import * as utils from "./cli-config/utils"
 import { chainSteps, fromCurrentDir, reposDir } from "tools"
 import { InitialStep } from "./evaluation-process/steps/initial"
@@ -14,6 +14,7 @@ import { Process } from "./process/process"
 import { FinalStep } from "./evaluation-process/steps/final"
 import { Logger } from "./evaluation-process/steps/logger"
 import chalk from "chalk"
+import { MessageType } from "messaging"
 
 const getStudents = (config: Config): Student[] => {
   const csv = readFileSync(fromCurrentDir(config.classroomFile))
@@ -25,6 +26,8 @@ const getStudents = (config: Config): Student[] => {
   return students
 }
 
+const nullOrStep = (cond: boolean, step: StudentProcessStep | null) => cond ? step : null
+
 const showCloneProgressFn = (progres: number, total: number): string => {
   return chalk`{yellow.bold Clone Progress:} {yellow ${progres}/${total}}`
 }
@@ -32,7 +35,6 @@ const showCloneProgressFn = (progres: number, total: number): string => {
 const showGradeProgressFn = (progres: number, total: number): string => {
   return chalk`{blue.bold Grade Progress:} {yellow ${progres}/${total}}`
 }
-
 
 const showCompletedProgressFn = (progres: number, total: number): string => {
   return chalk`{green.bold Completed Progress:} {yellow ${progres}/${total}}`
@@ -59,6 +61,7 @@ const prepare = (config: Config): InitialStep => {
   }
 
   const gradeLauncher = new Process(config, config.grader?.cmd ?? [], config.grader?.byStudent ?? false)
+  const writerLauncher = new Process(config, config.writer?.cmd ?? [], false)
 
   const initialStep = new InitialStep(config, students)
   const cloneBuffer = new BufferStep(config, bufferSize)
@@ -67,24 +70,26 @@ const prepare = (config: Config): InitialStep => {
   const gradeStep = new GradeProcessStep(config, gradeLauncher)
   const showGradeProgress = showCloneProgress.clone(showGradeProgressFn)
   const gradeBuffer = cloneBuffer.clone()
-  const writeStep = new WriteProcessStep(config)
+  const writeStep = new WriteProcessStep(config, writerLauncher)
   const showCompletedProgress = showCloneProgress.clone(showCompletedProgressFn)
   const finalBuffer = new BufferStep(config, students.length)
-  const finalStep = new FinalStep(config, [ gradeLauncher ])
   const logger = new Logger(config)
+  const finalStep = new FinalStep(config, [ gradeLauncher, writerLauncher ])
 
+  const nullOrGradeStep = nullOrStep.bind(null, !!config.grader)
+  const nullOrWriteStep = (step: StudentProcessStep) => nullOrGradeStep(nullOrStep(!!config.writer, step))
   chainSteps([
     initialStep,
     cloneStep,
     logger,
     showCloneProgress,
-    cloneBuffer,
-    gradeStep,
-    logger.clone(),
-    showGradeProgress,
-    gradeBuffer,
-    writeStep,
-    logger.clone(),
+    nullOrGradeStep(cloneBuffer),
+    nullOrGradeStep(gradeStep),
+    nullOrGradeStep(logger.clone()),
+    nullOrGradeStep(showGradeProgress),
+    nullOrGradeStep(gradeBuffer),
+    nullOrWriteStep(writeStep),
+    nullOrWriteStep(logger.clone()),
     showCompletedProgress,
     finalBuffer,
     finalStep

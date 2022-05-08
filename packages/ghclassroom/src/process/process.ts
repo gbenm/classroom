@@ -2,7 +2,7 @@ import { ChildProcess, spawn } from "child_process"
 import { createHash } from "crypto"
 import { join } from "path"
 import { Command, Config, Student } from "../cli-config"
-import { Message, EmitterFn, Node } from "../messaging"
+import { Message, EmitterFn, MessagingNode } from "../messaging"
 import { buildCommand, reposDir } from "tools"
 
 let tagId = 0
@@ -66,7 +66,7 @@ export class Process {
   }
 }
 
-export class ProcessConnection extends Node {
+export class ProcessConnection extends MessagingNode {
   public get exitCode(): number | null {
     return this.process.exitCode
   }

@@ -14,7 +14,6 @@ import { Process } from "./process/process"
 import { FinalStep } from "./evaluation-process/steps/final"
 import { Logger } from "./evaluation-process/steps/logger"
 import chalk from "chalk"
-import { MessageType } from "messaging"
 
 const getStudents = (config: Config): Student[] => {
   const csv = readFileSync(fromCurrentDir(config.classroomFile))

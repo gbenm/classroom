@@ -117,6 +117,15 @@ export default function ({ config }: { config: CSVWConfig }) {
   process.on("SIGINT", onExit)
 
   inout.on("message", (message) => {
+    if (message.type !== MessageType.request) {
+      inout.sendMessage(errorMessage({ 
+        type: MessageType.error,
+        tag: message.tag,
+        comment: "This program only accepts requests"
+     }))
+      return
+    }
+
     const missing = updateData(config, csvs, message)
 
     if (!missing) {

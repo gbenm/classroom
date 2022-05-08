@@ -24,7 +24,7 @@ export const buildCommand = (context: CommandContext, commands: Command[]) => {
 }
 
 export const chainSteps = (steps: (StudentProcessStep | null)[]) => {
-  steps.filter(step => step != null).forEach((step, i) => {
+  steps.filter(step => step != null).forEach((step, i, steps) => {
     const next = steps[i + 1]
     if ( !step ) {
       throw new Error("Step is null")

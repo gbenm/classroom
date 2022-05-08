@@ -83,7 +83,7 @@ const prepare = (config: Config): InitialStep => {
     cloneStep,
     logger,
     showCloneProgress,
-    nullOrGradeStep(cloneBuffer),
+    cloneBuffer,
     nullOrGradeStep(gradeStep),
     nullOrGradeStep(logger.clone()),
     nullOrGradeStep(showGradeProgress),

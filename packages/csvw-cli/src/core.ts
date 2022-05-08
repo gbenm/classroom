@@ -99,7 +99,7 @@ function updateData(config: CSVWConfig, csvs: CSVDirectoryCache, message: Messag
 function writeBack(config: CSVWConfig, csvs: CSVDirectoryCache): void {
   Object.values(csvs.files).forEach((cache) => {
     const file = join(config.source, cache.file)
-    writeFileSync(file, cache.header.concat(stringify(cache.content)))
+    writeFileSync(file, cache.header.concat("\n").concat(stringify(cache.content)))
   })
 }
 

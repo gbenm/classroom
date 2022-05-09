@@ -39,7 +39,7 @@ export class MessagingNode extends EventEmitter {
   }
 
   public sendMessage(message: Message): void {
-    this.output.write(JSON.stringify(message))
+    this.output.write(JSON.stringify(message).concat("\n"))
   }
 
   protected handleMessage(emit: EmitterFn, message: Message): void {

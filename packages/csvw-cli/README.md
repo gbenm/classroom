@@ -166,3 +166,4 @@ archivos o tiene muchas filas xD (fue más por salud mental).
     "missings": ["csv_row_id1", "csv_row_id2", ...]
 }
 ```
+

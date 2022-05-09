@@ -1,8 +1,22 @@
 {
   "name": "ghclassroom",
-  "private": true,
   "packageManager": "yarn@3.2.0",
   "version": "1.0.0-beta.2",
+  "author": "Josué Galeano",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gbenm/classroom.git"
+  },
+  "homepage": "https://github.com/gbenm/classroom",
+  "keywords": [
+    "github",
+    "classroom",
+    "cli",
+    "clone",
+    "grading",
+    "evaluation"
+  ],
   "main": "dist/index.js",
   "bin": "dist/cli.cjs",
   "types": "dist/index.d.ts",
@@ -44,5 +58,8 @@
         "./dist/messaging/index.d.ts"
       ]
     }
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

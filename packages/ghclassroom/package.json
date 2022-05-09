@@ -2,7 +2,7 @@
   "name": "ghclassroom",
   "private": true,
   "packageManager": "yarn@3.2.0",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "main": "dist/index.js",
   "bin": "dist/cli.cjs",
   "types": "dist/index.d.ts",

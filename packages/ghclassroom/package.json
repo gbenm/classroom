@@ -1,5 +1,6 @@
 {
   "name": "ghclassroom",
+  "private": true,
   "packageManager": "yarn@3.2.0",
   "main": "dist/index.js",
   "bin": "dist/cli.cjs",
@@ -31,9 +32,9 @@
     "chalk": "^4.0.0",
     "csv": "^6.0.5",
     "inquirer": "^8.2.4",
-    "messaging": "workspace:^",
+    "messaging": "1.0.0-beta",
+    "tools": "1.0.0-beta",
     "stream-json": "^1.7.4",
-    "tools": "workspace:^",
     "yargs": "^17.4.1"
   },
   "typesVersions": {

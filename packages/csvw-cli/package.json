@@ -1,7 +1,7 @@
 {
   "name": "csvw-cli",
-  "version": "1.0.0-beta",
   "packageManager": "yarn@3.2.0",
+  "version": "1.0.0-beta.1",
   "author": "Josué Galeano",
   "license": "MIT",
   "repository": {
@@ -50,8 +50,8 @@
   },
   "dependencies": {
     "csv": "^6.0.5",
-    "messaging": "workspace:^",
-    "tools": "workspace:^",
+    "messaging": "1.0.0-beta",
+    "tools": "1.0.0-beta",
     "yargs": "^17.4.1"
   },
   "files": [

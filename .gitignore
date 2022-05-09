@@ -9,3 +9,8 @@
 # Documentation here: https://yarnpkg.com/features/zero-installs
 !.yarn/cache
 #.pnp.*
+
+# project
+node_modules
+lerna-debug.log
+

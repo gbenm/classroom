@@ -50,8 +50,8 @@
   },
   "dependencies": {
     "csv": "^6.0.5",
-    "messaging": "1.0.0-beta",
-    "tools": "1.0.0-beta",
+    "messaging": "file:../messaging",
+    "tools": "file:../tools",
     "yargs": "^17.4.1"
   },
   "files": [

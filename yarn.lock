@@ -2330,8 +2330,8 @@ __metadata:
     cpy-cli: ^4.1.0
     csv: ^6.0.5
     eslint: ^8.14.0
-    messaging: "workspace:^"
-    tools: "workspace:^"
+    messaging: "file:../messaging"
+    tools: "file:../tools"
     ts-node: ^10.7.0
     typescript: ^4.6.4
     yargs: ^17.4.1
@@ -3180,8 +3180,9 @@ __metadata:
     csv: ^6.0.5
     eslint: ^8.14.0
     inquirer: ^8.2.4
-    messaging: "workspace:^"
+    messaging: "file:../messaging"
     stream-json: ^1.7.4
+    tools: "file:../tools"
     ts-node: ^10.7.0
     typescript: ^4.6.4
     yargs: ^17.4.1
@@ -4419,7 +4420,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"messaging@workspace:^, messaging@workspace:packages/messaging":
+"messaging@file:../messaging::locator=csvw-cli%40workspace%3Apackages%2Fcsvw-cli":
+  version: 1.0.0-beta
+  resolution: "messaging@file:../messaging#../messaging::hash=ce0502&locator=csvw-cli%40workspace%3Apackages%2Fcsvw-cli"
+  dependencies:
+    stream-json: ^1.7.4
+  checksum: 1ce7625d19926017ddccdff89b184a56cf939394afba669e114f4df21b2d26278e0594cc7984bbb15dd43c2bfcdeff40b608effed3505687697923d72f7095ae
+  languageName: node
+  linkType: hard
+
+"messaging@file:../messaging::locator=ghclassroom%40workspace%3Apackages%2Fghclassroom":
+  version: 1.0.0-beta
+  resolution: "messaging@file:../messaging#../messaging::hash=ce0502&locator=ghclassroom%40workspace%3Apackages%2Fghclassroom"
+  dependencies:
+    stream-json: ^1.7.4
+  checksum: 1ce7625d19926017ddccdff89b184a56cf939394afba669e114f4df21b2d26278e0594cc7984bbb15dd43c2bfcdeff40b608effed3505687697923d72f7095ae
+  languageName: node
+  linkType: hard
+
+"messaging@workspace:packages/messaging":
   version: 0.0.0-use.local
   resolution: "messaging@workspace:packages/messaging"
   dependencies:
@@ -6495,7 +6514,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tools@workspace:^, tools@workspace:packages/tools":
+"tools@file:../tools::locator=csvw-cli%40workspace%3Apackages%2Fcsvw-cli":
+  version: 1.0.0-beta.1
+  resolution: "tools@file:../tools#../tools::hash=16fb1b&locator=csvw-cli%40workspace%3Apackages%2Fcsvw-cli"
+  checksum: a9661dd61171eababc351ae9d4622a5583660a54347b88e0f99cf0cb2a16464789088b38812696137f894c6574c7db6e401738215406b4733a7ab41caf685775
+  languageName: node
+  linkType: hard
+
+"tools@file:../tools::locator=ghclassroom%40workspace%3Apackages%2Fghclassroom":
+  version: 1.0.0-beta.1
+  resolution: "tools@file:../tools#../tools::hash=16fb1b&locator=ghclassroom%40workspace%3Apackages%2Fghclassroom"
+  checksum: a9661dd61171eababc351ae9d4622a5583660a54347b88e0f99cf0cb2a16464789088b38812696137f894c6574c7db6e401738215406b4733a7ab41caf685775
+  languageName: node
+  linkType: hard
+
+"tools@workspace:packages/tools":
   version: 0.0.0-use.local
   resolution: "tools@workspace:packages/tools"
   dependencies:

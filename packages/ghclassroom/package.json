@@ -31,11 +31,11 @@
   },
   "dependencies": {
     "chalk": "^4.0.0",
+    "clroom-messaging": "workspace:^",
+    "clroom-tools": "workspace:^",
     "csv": "^6.0.5",
     "inquirer": "^8.2.4",
-    "messaging": "file:../messaging",
     "stream-json": "^1.7.4",
-    "tools": "file:../tools",
     "yargs": "^17.4.1"
   },
   "typesVersions": {

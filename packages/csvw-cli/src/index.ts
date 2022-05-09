@@ -1,10 +1,10 @@
 import init from "./core"
 import { copyFileSync } from "fs"
 import { dirname, join } from "path"
-import { identity } from "tools"
+import { identity } from "clroom-tools"
 import yargs from "yargs"
 import { hideBin } from "yargs/helpers"
-import { CSVWConfig } from "tools/src/types"
+import { CSVWConfig } from "clroom-tools/src/types"
 
 let lock = false
 const currentDir = process.cwd()

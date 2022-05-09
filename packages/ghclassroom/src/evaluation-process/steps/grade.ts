@@ -1,7 +1,7 @@
 import { Config } from "../../cli-config"
 import { Process } from "../../process/process"
-import { fromCurrentDir } from "tools"
-import { ProcessInformation, StudentProcessStep } from "tools/types"
+import { fromCurrentDir } from "clroom-tools"
+import { ProcessInformation, StudentProcessStep } from "clroom-tools/types"
 import { MessageType } from "../../messaging"
 
 export class GradeProcessStep extends StudentProcessStep {

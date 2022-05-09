@@ -1,5 +1,5 @@
 import { Config } from "../../cli-config"
-import { ProcessInformation, StudentProcessStep } from "tools/types"
+import { ProcessInformation, StudentProcessStep } from "clroom-tools/types"
 
 export type ProgressMessageFn = (progress: number, total: number) => string
 

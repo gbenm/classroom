@@ -1,5 +1,5 @@
 import { Config } from "../../cli-config"
-import { StudentProcessStep, ProcessInformation } from "tools/types"
+import { StudentProcessStep, ProcessInformation } from "clroom-tools/types"
 
 export class BufferStep extends StudentProcessStep {
   private buffer: ProcessInformation[] = []

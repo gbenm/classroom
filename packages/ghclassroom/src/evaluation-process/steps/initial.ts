@@ -1,5 +1,5 @@
 import { Config, Student } from "../../cli-config"
-import { ProcessInformation, StudentProcessStep } from "tools/types"
+import { ProcessInformation, StudentProcessStep } from "clroom-tools/types"
 
 export class InitialStep extends StudentProcessStep {
   public constructor(config: Config, private students: Student[]) {

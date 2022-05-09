@@ -1,6 +1,6 @@
 import { Config } from "../../cli-config"
 import { Process } from "../../process/process"
-import { ProcessInformation, StudentProcessStep } from "tools/types"
+import { ProcessInformation, StudentProcessStep } from "clroom-tools/types"
 import { Logger } from "./logger"
 
 export class FinalStep extends StudentProcessStep {

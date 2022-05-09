@@ -2,7 +2,7 @@ import chalk from "chalk"
 import { mkdirSync, writeFileSync } from "fs"
 import { join } from "path"
 import { Config, Student } from "../../cli-config"
-import { ProcessInformation, StudentProcessStep } from "tools/types"
+import { ProcessInformation, StudentProcessStep } from "clroom-tools/types"
 
 export type JsonLog = {
   create_at: string,

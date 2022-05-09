@@ -1,6 +1,6 @@
 import chalk from "chalk"
-import { MessageType } from "messaging"
-import { Config, ProcessInformation, StudentProcessStep } from "tools/types"
+import { MessageType } from "clroom-messaging"
+import { Config, ProcessInformation, StudentProcessStep } from "clroom-tools/types"
 import { Process } from "../../process/process"
 
 export class WriteProcessStep extends StudentProcessStep {

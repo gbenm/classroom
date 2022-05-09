@@ -1,7 +1,7 @@
 import { spawn } from "child_process"
 import { Config, Student } from "../../cli-config"
-import { buildCommand, reposDir } from "tools"
-import { ProcessInformation, StudentProcessStep } from "tools/types"
+import { buildCommand, reposDir } from "clroom-tools"
+import { ProcessInformation, StudentProcessStep } from "clroom-tools/types"
 
 export class CloneProcessStep extends StudentProcessStep {
   protected execute(info: ProcessInformation): Promise<ProcessInformation> {

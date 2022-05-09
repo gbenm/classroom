@@ -1,8 +1,15 @@
 {
-  "name": "tools",
-  "private": true,
+  "name": "clroom-tools",
   "packageManager": "yarn@3.2.0",
   "version": "1.0.0-beta.2",
+  "author": "Josué Galeano",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gbenm/classroom.git"
+  },
+  "homepage": "https://github.com/gbenm/classroom",
+  "keywords": [],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

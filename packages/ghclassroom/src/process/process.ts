@@ -3,7 +3,7 @@ import { createHash } from "crypto"
 import { join } from "path"
 import { Command, Config, Student } from "../cli-config"
 import { Message, EmitterFn, MessagingNode } from "../messaging"
-import { buildCommand, reposDir } from "tools"
+import { buildCommand, reposDir } from "clroom-tools"
 
 let tagId = 0
 

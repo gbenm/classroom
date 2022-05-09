@@ -1,9 +1,9 @@
 import { mkdirSync, readFileSync } from "fs"
 import { parse } from "csv-parse/sync"
 
-import { ConfigGenerator, Config, Student, StudentProcessStep } from "tools/types"
+import { ConfigGenerator, Config, Student, StudentProcessStep } from "clroom-tools/types"
 import * as utils from "./cli-config/utils"
-import { chainSteps, fromCurrentDir, reposDir } from "tools"
+import { chainSteps, fromCurrentDir, reposDir } from "clroom-tools"
 import { InitialStep } from "./evaluation-process/steps/initial"
 import { BufferStep } from "./evaluation-process/steps/buffer"
 import { ShowProgress } from "./evaluation-process/steps/show-process"

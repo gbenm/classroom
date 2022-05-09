@@ -1985,6 +1985,36 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clroom-messaging@workspace:^, clroom-messaging@workspace:packages/messaging":
+  version: 0.0.0-use.local
+  resolution: "clroom-messaging@workspace:packages/messaging"
+  dependencies:
+    "@types/eslint": ^8.4.1
+    "@types/node": ^17.0.30
+    "@types/stream-json": ^1.7.2
+    "@typescript-eslint/eslint-plugin": ^5.21.0
+    "@typescript-eslint/parser": ^5.21.0
+    eslint: ^8.14.0
+    stream-json: ^1.7.4
+    ts-node: ^10.7.0
+    typescript: ^4.6.4
+  languageName: unknown
+  linkType: soft
+
+"clroom-tools@workspace:^, clroom-tools@workspace:packages/tools":
+  version: 0.0.0-use.local
+  resolution: "clroom-tools@workspace:packages/tools"
+  dependencies:
+    "@types/eslint": ^8.4.1
+    "@types/node": ^17.0.30
+    "@typescript-eslint/eslint-plugin": ^5.21.0
+    "@typescript-eslint/parser": ^5.21.0
+    eslint: ^8.14.0
+    ts-node: ^10.7.0
+    typescript: ^4.6.4
+  languageName: unknown
+  linkType: soft
+
 "cmd-shim@npm:^4.1.0":
   version: 4.1.0
   resolution: "cmd-shim@npm:4.1.0"
@@ -2327,11 +2357,11 @@ __metadata:
     "@types/yargs": ^17.0.10
     "@typescript-eslint/eslint-plugin": ^5.21.0
     "@typescript-eslint/parser": ^5.21.0
+    clroom-messaging: "workspace:^"
+    clroom-tools: "workspace:^"
     cpy-cli: ^4.1.0
     csv: ^6.0.5
     eslint: ^8.14.0
-    messaging: "file:../messaging"
-    tools: "file:../tools"
     ts-node: ^10.7.0
     typescript: ^4.6.4
     yargs: ^17.4.1
@@ -3176,13 +3206,13 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.21.0
     "@typescript-eslint/parser": ^5.21.0
     chalk: ^4.0.0
+    clroom-messaging: "workspace:^"
+    clroom-tools: "workspace:^"
     cpy-cli: ^4.1.0
     csv: ^6.0.5
     eslint: ^8.14.0
     inquirer: ^8.2.4
-    messaging: "file:../messaging"
     stream-json: ^1.7.4
-    tools: "file:../tools"
     ts-node: ^10.7.0
     typescript: ^4.6.4
     yargs: ^17.4.1
@@ -4419,40 +4449,6 @@ __metadata:
   checksum: 7268db63ed5169466540b6fb947aec313200bcf6d40c5ab722c22e242f651994619bcd85601602972d3c85bd2cc45a358a4c61937e9f11a061919a1da569b0c2
   languageName: node
   linkType: hard
-
-"messaging@file:../messaging::locator=csvw-cli%40workspace%3Apackages%2Fcsvw-cli":
-  version: 1.0.0-beta
-  resolution: "messaging@file:../messaging#../messaging::hash=ce0502&locator=csvw-cli%40workspace%3Apackages%2Fcsvw-cli"
-  dependencies:
-    stream-json: ^1.7.4
-  checksum: 1ce7625d19926017ddccdff89b184a56cf939394afba669e114f4df21b2d26278e0594cc7984bbb15dd43c2bfcdeff40b608effed3505687697923d72f7095ae
-  languageName: node
-  linkType: hard
-
-"messaging@file:../messaging::locator=ghclassroom%40workspace%3Apackages%2Fghclassroom":
-  version: 1.0.0-beta
-  resolution: "messaging@file:../messaging#../messaging::hash=ce0502&locator=ghclassroom%40workspace%3Apackages%2Fghclassroom"
-  dependencies:
-    stream-json: ^1.7.4
-  checksum: 1ce7625d19926017ddccdff89b184a56cf939394afba669e114f4df21b2d26278e0594cc7984bbb15dd43c2bfcdeff40b608effed3505687697923d72f7095ae
-  languageName: node
-  linkType: hard
-
-"messaging@workspace:packages/messaging":
-  version: 0.0.0-use.local
-  resolution: "messaging@workspace:packages/messaging"
-  dependencies:
-    "@types/eslint": ^8.4.1
-    "@types/node": ^17.0.30
-    "@types/stream-json": ^1.7.2
-    "@typescript-eslint/eslint-plugin": ^5.21.0
-    "@typescript-eslint/parser": ^5.21.0
-    eslint: ^8.14.0
-    stream-json: ^1.7.4
-    ts-node: ^10.7.0
-    typescript: ^4.6.4
-  languageName: unknown
-  linkType: soft
 
 "micromatch@npm:^4.0.4":
   version: 4.0.5
@@ -6513,34 +6509,6 @@ __metadata:
   checksum: f76fa01b3d5be85db6a2a143e24df9f60dd047d151062d0ba3df62953f2f697b16fe5dad9b0ac6191c7efc7b1d9dcaa4b768174b7b29da89d4428e64bc0a20ed
   languageName: node
   linkType: hard
-
-"tools@file:../tools::locator=csvw-cli%40workspace%3Apackages%2Fcsvw-cli":
-  version: 1.0.0-beta.1
-  resolution: "tools@file:../tools#../tools::hash=16fb1b&locator=csvw-cli%40workspace%3Apackages%2Fcsvw-cli"
-  checksum: a9661dd61171eababc351ae9d4622a5583660a54347b88e0f99cf0cb2a16464789088b38812696137f894c6574c7db6e401738215406b4733a7ab41caf685775
-  languageName: node
-  linkType: hard
-
-"tools@file:../tools::locator=ghclassroom%40workspace%3Apackages%2Fghclassroom":
-  version: 1.0.0-beta.1
-  resolution: "tools@file:../tools#../tools::hash=16fb1b&locator=ghclassroom%40workspace%3Apackages%2Fghclassroom"
-  checksum: a9661dd61171eababc351ae9d4622a5583660a54347b88e0f99cf0cb2a16464789088b38812696137f894c6574c7db6e401738215406b4733a7ab41caf685775
-  languageName: node
-  linkType: hard
-
-"tools@workspace:packages/tools":
-  version: 0.0.0-use.local
-  resolution: "tools@workspace:packages/tools"
-  dependencies:
-    "@types/eslint": ^8.4.1
-    "@types/node": ^17.0.30
-    "@typescript-eslint/eslint-plugin": ^5.21.0
-    "@typescript-eslint/parser": ^5.21.0
-    eslint: ^8.14.0
-    ts-node: ^10.7.0
-    typescript: ^4.6.4
-  languageName: unknown
-  linkType: soft
 
 "tough-cookie@npm:~2.5.0":
   version: 2.5.0

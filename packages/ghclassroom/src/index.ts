@@ -8,7 +8,7 @@ import { dirname, join } from "path"
 import yargs from "yargs"
 import { hideBin } from "yargs/helpers"
 import { prompt } from "inquirer"
-import { fromCurrentDir, identity } from "tools"
+import { fromCurrentDir, identity } from "clroom-tools"
 
 let lock = false
 

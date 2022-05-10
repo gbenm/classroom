@@ -136,6 +136,65 @@ const row = file.rows[indexEntry.index]
 Claro que sólo vale la pena si realmente son varios
 archivos o tiene muchas filas xD (fue más por salud mental).
 
+## Programa principal
+Esta CLI está diseñada para servir como un medio para
+escribir resultados, el programa principal (escrito
+por usted u otro paquete como [ghclassroom](https://www.npmjs.com/package/ghclassroom))
+debería ejecutar este comando y escribir o leer
+de la salida/entrada del programa:
+
+```javascript
+// EJEMPLO
+import { spawn } from "child_process"
+import { MessagingNode, MessageType } from "csvw-cli/messaging"
+
+// ... algo que hacer
+
+const process = spawn("csvwriter", {
+    shell: true,
+    stdio: "pipe"
+})
+
+const inout = new MessagingNode(process.stdout, process.stdin)
+
+// dataEmitter es un ejemplo
+// para ilustrar que se obtiene un resultado
+dataEmitter.on("data", (result) => {
+    inout.sendMessage({
+        ...result,
+        tag: result.id,
+        type: MessageType.request
+    })
+})
+
+inout.on("message", (message) => {
+    if (message.type == MessageType.error) {
+        console.log(message.tag, "falló")
+        return
+    }
+
+    console.log(message.tag, "ok!")
+})
+```
+También puede hacer uso de la herencia para crear
+una clase que guarde la información, por ejemplo
+si crea un clase que guarde el tag y luego sobreescribe
+`handleMessage`:
+
+```javascript
+handleMessage(emit, message) {
+    if (this.tag === message.tag) {
+        emit(message)
+    }
+}
+```
+gana la capacidad de filtrar que mensajes pertenecen
+a esa conversación.
+
+> `csvw-cli/messaging` expone el paquete `clroom-messaging`
+> que utiliza `csvw-cli`.
+
+
 ## Formato de la petición
 ```json
 {

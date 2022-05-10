@@ -189,6 +189,48 @@ export const config = ({
 }
 ```
 
+## Grader
+Este componente debe ser implementado por usted, para los
+mensajes se puede utilizar el paquete de messaging
+(si lo implementa con node.js).
+
+```javascript
+import { MessagingNode, MessageType } from "ghclassroom/messaging"
+
+const inout = new MessagingNode(process.stdin, process.stdout)
+
+inout.on("message", (message) => {
+  // manejar la petición
+
+  // ...
+
+  // enviar una respuesta
+  inout.sendMessage({
+    tag: message.tag, // recuerde responder a la conversación
+    type: MessageType.response,
+    comment: "...",
+    grade: 100
+  })
+})
+```
+
+> Lo de arriba expone el paquete `clroom-messaging`
+> incluída en la CLI de ghclassroom.
+
+En sí lo que debe soportar es leer y escribir JSON
+por consola. La CLI ghclassroom soporta la lectura
+sin importar si se envían newlines, lo que debe
+cumplir es que sea un JSON válido (esto gracias a
+[stream-json](https://www.npmjs.com/package/stream-json))
+por lo que no se debe preocupar como imprimir a
+pantalla. Por otro lado ghclassroom escribe en
+la entrada de su evaluador en una sola línea
+(se usa `JSON.stringify()` y se separan por medio
+de un newline`\n` cada mensaje). El lenguaje para su
+implementación queda a su criterio, pero tenga
+en cuenta que debe ser posible arrancarlo por medio
+de lo declarado en `config.grader.cmd`.
+
 ## Writer
 Si el archivo en el que se van a escribir los
 resultados es un CSV, te puede interesar:

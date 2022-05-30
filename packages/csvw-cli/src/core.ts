@@ -133,6 +133,6 @@ export default function ({ config }: { config: CSVWConfig }) {
     } else {
       inout.sendMessage(errorMessage(missing))
     }
-
+    writeBack(config, csvs)
   })
 }

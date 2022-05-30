@@ -12,7 +12,7 @@ const configFile = "csvw.config.mjs"
 
 function createConfigFile() {
   lock = true
-  const typesFile = join(dirname(require.resolve("tools")), "types", "ghcl.types.d.ts")
+  const typesFile = join(dirname(require.resolve("clroom-tools")), "types", "ghcl.types.d.ts")
   const configTemplateFile = join(__dirname, "cli-config", configFile)
 
   copyFileSync(typesFile, join(currentDir, "csvw.types.ts"))

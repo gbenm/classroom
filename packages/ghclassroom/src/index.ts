@@ -26,7 +26,7 @@ export function start() {
   yargs(hideBin(process.argv))
   .command("init", "Crea los archivos de configuración en el directorio actual", identity, () => {
     lock = true
-    const typesFile = join(dirname(require.resolve("tools")), "types", "ghcl.types.d.ts")
+    const typesFile = join(dirname(require.resolve("clroom-tools")), "types", "ghcl.types.d.ts")
     const configTemplateFile = join(__dirname, "cli-config", "ghcl.config.mjs")
 
     copyFileSync(typesFile, join(currentDir, "ghcl.types.ts"))

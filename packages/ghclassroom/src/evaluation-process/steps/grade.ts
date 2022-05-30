@@ -3,6 +3,7 @@ import { Process } from "../../process/process"
 import { fromCurrentDir } from "clroom-tools"
 import { ProcessInformation, StudentProcessStep } from "clroom-tools/types"
 import { MessageType } from "../../messaging"
+import { join } from "path"
 
 export class GradeProcessStep extends StudentProcessStep {
   constructor(config: Config, private process: Process) {
@@ -28,7 +29,7 @@ export class GradeProcessStep extends StudentProcessStep {
           type: MessageType.request,
           tag: connection.tag,
           student: info.student,
-          path: fromCurrentDir(this.config.clone.getCloneDirectory(info.student))
+          path: fromCurrentDir(join("repos", this.config.clone.getCloneDirectory(info.student)))
         })
 
         connection.on("message", (message) => {

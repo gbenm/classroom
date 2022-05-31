@@ -13,4 +13,5 @@
 # project
 node_modules
 lerna-debug.log
+**/tsconfig.tsbuildinfo
 

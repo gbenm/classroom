@@ -1,7 +1,7 @@
 {
   "name": "ghclassroom",
   "packageManager": "yarn@3.2.0",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "description": "clone, grade and write results with github classroom",
   "author": "Josué Galeano",
   "license": "MIT",
